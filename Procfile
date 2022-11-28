@@ -1,1 +1,1 @@
-web: gunicorn PROJECT_NAME.wsgi
+web: gunicorn deolho.wsgi
