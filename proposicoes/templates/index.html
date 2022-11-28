@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+
+{% block content %}
+  <h1>Proposições</h1>
+  <p>Welcome to LocalLibrary, a website developed by <em>Mozilla Developer Network</em>!</p>
+  <h2>Dynamic content</h2>
+
+  <div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                {% for col in data.columns %}
+                    <th>{{ col }}</th>
+                {% endfor %}
+                <!-- <th>ID</th>
+                <th>URL</th>
+                <th>Tipo</th>
+                <th>Ano</th>
+                <th>Ementa</th>
+                <th>Descrição</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for i, r in data.iterrows %}
+            <tr>
+                {% for c in r %}
+                    <td>{{ c }}</td>
+                {% endfor %}
+                <!-- <td>{{ elem.id }}</td>
+                <td>{{ elem.uri }}</td>
+                <td>{{ elem.siglaTipo }}</td>
+                <td>{{ elem.ano }}</td>
+                <td>{{ elem.ementa }}</td>
+                <td>{{ elem.descricaoTipo }}</td> -->
+            </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+</div>
+{% endblock %}
