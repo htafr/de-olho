@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+<!-- Add additional CSS in static file -->
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+
+{% block content %}
+<h1>Proposições de {{ year }}</h1>
+<h2>Selecione o ano:</h2>
+<form method="POST" action="">{% csrf_token %}
+    <select name="select_year">
+        {% for i in years %}
+        <option value={{ i }}>{{ i }}</option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Selecionar"/>
+</form>
+
+<div class="container mt-5">
+    <table class="table">
+        <thead>
+            <tr>
+                {% for col in data.columns %}
+                    {% if col != "uri" %}
+                        <th>{{ col }}</th>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for index, row in data.iterrows %}
+            <tr>
+                {% for cell in row %}
+                    {% if cell == row.id %}
+                        <td><a href={{ row.uri }}>{{ cell }}</a></td>
+                    {% elif cell != row.uri %}
+                        <td>{{ cell }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endfor %}    
+        </tbody>
+    </table>
+</div>
+{% endblock %}
